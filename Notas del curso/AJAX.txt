@@ -1,0 +1,40 @@
+****************AJAX***************
+Ajax es una tecnologia que permite recargar elementos de una pagina sin necesidad de actualizar la pagina, es asincrona, por lo que puede mandar y recibir peticiones en HTTP en segundo plano.
+
+Para hacerlo primero se debe crear un objeto tipo
+XMLHtppRequest
+luego abrir una conexión con el metodo open
+y checar el status, si fue exitosa la peticion, continua, sino aborta
+Los Codigos de Status:
+200:Correcto
+403:Prohibido
+404:Not Found
+
+Los codigos de OnReadyStateChange:
+0- No inicializado
+1- Conexion establecida
+2- Recibido
+3- Procesando
+4- Respuesta lista
+
+y luego enviarla con el metodo send
+
+API
+Aplication Programming Interface
+Son funciones,metodos que ofrece una libreria para ser utilizada por otro software como capa de abstraccion
+Para acceder al servicio hay que enviar una peticion estructurada.
+Ejemplo: Google Maps API
+REST API'S
+REST Representational State Transfer
+Puede ser diseñada en cualquier lenguaje
+La API debe responder a los request de HTTP: Get,Post,Delete,Put,Patch.
+Cada API tiene sus propias reglas,metodos y estructuras
+
+Endpoints:
+URLs para realizar operaciones CRUD
+Ejemplo:
+Listar todos los clientes: GET /clientes
+Obtener un solo cliente: GET /clientes/10
+Crear un cliente: POST /clientes
+Editar un contacto PUT /clientes/3
+Borrar un contacto: DELETE /clientes/8

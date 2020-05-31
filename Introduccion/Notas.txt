@@ -1,0 +1,216 @@
+*********Cadenas de texto***************
+var cadena="Hola";
+//Tamaño de la cadena
+cadena.length -> 4
+//Concatenar dos cadenas
+cadena.concat(' Mundo') -> 'Hola Mundo'
+//Convertir a mayusculas
+cadena.toUpperCase() -> 'HOLA'
+//Convertir a minúsculas
+cadena.toLowerCase() -> 'hola'
+//Encuentra el indice donde empieza la cadena ingresada, regresa -1 si no se encuentra.
+cadena.indexOf('ola') -> 1
+//Retorna la subcadena formada desde el indice 0 hasta el 3.
+cadena.substring(0,3) -> 'Hol'
+//Regresa la subcadena partiendo del frente hacia atras si es un numero negativo
+cadena.slice(-3) -> 'ola'
+//Regresa la subcadena desde el indice 0, formada por 2 caracteres
+cadena.slice(0,2)-> 'Ho'
+
+cadena="Hola Mundo";
+//Separa la cadena a partir del separador ingresado, las regresa en un arreglo
+cadena.split(' ') -> {"Hola","Mundo"}
+//Regresa un booleano si esta la cadena argumento dentro de la cadena original
+cadena.includes('ol') -> true
+//Repite la cadena el numero de veces que se ingrese
+cadena.repeat(3) -> 'HolaHolaHola'
+
+***********Numeros**********************
+const num1=30, num2=20.20, num3=-3;
+Puede ser float, int, etc.
+Operaciones:
++ Suma
+- Resta
+* Producto
+/ Division
+% Modulo
+//FUNCIONES DE LIBRERIA MATH
+Math.PI -> Valor de PI
+//Redondea flotantes a enteros.
+Math.round(2.4) -> 2
+//Funcion techo
+Math.ceil(2.4) -> 3
+//Funcion suelo
+Math.floor(2.4) -> 2
+//Raiz cuadrada y valor absoluto
+Math.sqrt(num) 
+Math.abs(num)
+//Funcion potencia num^potencia 
+Math.pow(num,potencia)
+Math.min({1,2,3}) -> Regresa el minimo (1)
+Math.max({1,2,3}) -> Regresa el maximo (3)
+//Generar numeros aleatorios, regresa un flotante entre 0 y 1
+Math.random() 
+
+********Tipos de dato*******************
+una var,let,const puede ser de cualquier tipo de dato.
+//Mostrar tipo de dato de la variable
+typeof variable 
+null,arrays,estructuras(JSON objects),dates -> object
+symbol
+
+********Operadores de comparacion******
+>,<
+== Igual que (20=="20" true)
+=== Igual que valor y tipo de dato (20===20 true, 20==="20" false)
+!= Diferente
+
+******Convertir cadenas a numeros*****
+var num="50";
+//Convertir una cadena a numero
+Number(num),parseInt(num) 
+Number(true)=1, Number(null)=0
+parseFloat() para numeros flotantes
+
+num="1239.123132"
+//Regresa el numero truncado a n decimales, sin argumentos=sin decimales
+num.toFixed(n) 
+
+let cp=12314;
+//Convierte numeros a cadenas, tambien convierte booleans y arrays.
+String(cp),cp.toString() -> "12314"
+String([1,2,3])-> "1,2,3"
+
+*******String template***********
+let html;
+const producto="Pizza",precio=30;
+html="<ul>"+
+"<li>Orden:"+ producto+"</li>"+
+"<li>Precio:"+ precio+"</li>"+
+"</ul>";
+|
+V
+html=`<ul>
+		<li>Orden: ${producto} </li
+		<li>Precio: ${precio}</li>
+	</ul>`;
+Esto hace que te evites tener que concatenar muchas cadenas
+
+**********ARREGLOS*************
+const numeros=[10,20,30,40,50];
+Puedes mezclar tipos de datos en un arreglo 
+//Tamaño del arreglo
+numeros.length -> 5
+//Saber si una variable es un arreglo, Regresa true o false
+Array.isArray(numeros) -> true
+//Agregar un valor al final del arreglo
+numeros.push(60) -> [10,20,30,40,50,60]
+//Agregar un valor al inicio del arreglo
+numeros.unshift(5) -> [5,10,20,30,40,50,60]
+//Encontrar un valor en el arreglo, Regresa el indice del valor
+numeros.indexOf(30) -> 3
+//Eliminar el elemento del final del arreglo
+numeros.pop() -> [5,10,20,30,40,50]
+//Elimina el elemento del inicio del arreglo
+numeros.shift() -> [10,20,30,40,50]
+//Elimina x elementos del arreglo a partir de la posicion n
+numeros.splice(n,x);
+//Invierte el arreglo
+numeros.reverse()
+//Concatenar arreglos, regresa el arreglo resultado de la union de ambos
+let numeros2=[90,80,70]
+numeros.concat(numeros2) -> [10,20,30,40,50,90,80,70]
+//Ordenar un arreglo, si es de cadenas o chars los ordena alfabeticamente
+const frutas=['Platano','Manzana','Fresa','Naranja']
+frutas.sort() -> ['Fresa','Manzana','Naranja','Platano']
+//Ordenar un arreglo con una funcion comparadora
+arreglo.sort(function(x,y){
+	return y-x;
+}); //Esta ordena un arreglo de numeros de mayor a menor
+
+*********const Objects y Arrays*************
+const arr=[1,2,3]
+En arreglos no puedes reasignar el arreglo entero, pero si puedes modificar el numero de una posicion
+arr[0]=4;
+Tambien puedes agregar elementos al inicio y final del arreglo
+arr.push(4);
+
+********Objects***************
+//Generar un objeto en JS
+const persona={
+	nombre: 'Miguel',
+	apellido: 'Martinez',
+	profesion: 'Diseñador',
+	edad: 20,
+	musica: ['Trance','Rock'],
+	hogar: {
+		ciudad: 'Guadalajara',
+		pais: 'Mexico'
+	},
+	nacimiento: function(){
+		return new Date().getFullYear()-this.edad;
+	}
+};
+//getFullYear() regresa el año actual.
+Si se imprime la variable persona, te aparecera con todo y llaves y etiquetas.
+//Acceder a un campo de un objeto
+persona.nombre -> 'Miguel'
+persona.edad -> 20
+persona.musica -> ['Trance','Rock']
+persona.musica[0] -> 'Trance' 
+Al arreglo musica se le puede realizar cualquier Operacion
+persona.hogar.ciudad -> 'Guadalajara'
+persona.nacimiento() -> 2000
+//Forma alternativa de acceso
+persona['nombre']-> 'Miguel'
+persona['hogar']['pais']-> 'Mexico'
+
+*********Arreglo de Objects**********
+//Generacion
+const autos = [
+	{
+		modelo: 'Mustang',
+		motor: 6.0
+	},
+	{
+		modelo: 'Camaro',
+		motor: 6.1
+	},
+	{
+		modelo: 'Challenger',
+		motor: 6.3
+	}
+];
+//Acceso
+autos[0].modelo ->'Mustang'
+autos.length -> 3
+Cuando es const si se puede modificar los valores de un objeto individualmente, no reasignar el arreglo
+
+***********FECHAS************
+En Javascript existe un objeto llamado Date
+//Crear fecha
+const diaHoy=new Date();
+const navidad2017=new Date('12-25-2017');
+//Imprimir fecha
+console.log(diaHoy);
+Se imprime la fecha en formato:
+//Wed March 25 2020 17:19:00 GMT-0600
+
+//Metodos de Date
+let valor;
+//Mes de 0-11
+valor=diaHoy.getMonth(); -> 2
+//Dia actual
+valor=diaHoy.getDate()||valor=diaHoy.getDay(); -> 25
+//Año actual
+valor=diaHoy.getFullYear(); -> 2020
+//Minutos
+valor=diaHoy.getMinutes(); -> 23
+//Hora
+valor=diaHoy.getHours(); -> 17
+//Fecha en milisegundos desde 1970
+valor=getDiaHoy.getTime(); 
+//Modificar valores de la fecha
+valor=getDiaHoy.setFullYear(2016);
+Aplica el set para todos los campos que se obtienen con get 
+

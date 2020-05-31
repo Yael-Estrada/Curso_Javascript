@@ -1,0 +1,116 @@
+Un event listener espera a que el usuario del programa haga una
+accion dentro del sitio web
+
+***************Event Listener Click*****************
+Cuando des click en un boton, elemento o etiqueta, se ejecute un accion
+
+**
+document.querySelector('#submit-buscador')
+.addEventListener('click',function(event){
+	alert('Buscando cursos');	
+});
+**
+
+El argumento event se pasa por defecto, representa el evento que se produce
+al dar click al elemento, si esta en un form el evento es la action
+
+Para evitar que se realize ese evento se usa:
+**
+event.preventDefault();
+**
+
+Otra forma de asignar funciones a los event listener es crear funciones aparte
+
+**
+docuent.querySelector('#submit-buscador')
+.addEventListener('click',ejecutarBoton);
+
+function ejecutarBoton(e){
+	e.preventDefault();
+	alert('Desde la funcion');
+}
+**
+El elemento e es de tipo MouseEvent y tiene diversos atributos
+entre ellos esta target, que es el elemento al que se da click
+
+*********Eventos con el Mouse**********
+
+const encabezado=document.querySelector('#encabezado');
+const enlaces =document.querySelectorAll('.enlace');
+const boton=document.querySelector('#vaciar-carrito');
+function obtenerEvento(e){
+	console.log(`EVENTO: ${e.type}`);
+}
+
+//e.type nos reporta que evento usamos para acceder a la funcion
+-click
+-dblclick (double click)
+-mouseenter (El mouse entra dento del area del elemento)
+-mouseleave (El mouse sale del area del elemento)
+-mouseover (Siempre que el mouse este sobre el elemento)
+-mouseout (Siempre que el elemento salga del elemento)
+-mousedown (Cuando esta presionado el elemento)
+-mouseup (Cuando das click en el elemento y sueltas se ejecuta)
+-mousemove (Cada que mueves el mouse en el elemento mandas valores)
+Todos estos eventos pueden pasarse en el primer argumento del addEventListener
+
+************Inputs************
+const busqueda=document.querySelector('#buscador');
+busqueda.addEventListener('keydown',obtenerEvento);
+function obtenerEvento(e){
+	console.log(busqueda.value);
+	console.log(`EVENTO: ${e.type}`);
+}
+
+keydown: Se ejecuta cada que aprietes una tecla.
+keyup: Cada que se oprime una tecla, cuando la sueltas se ejecuta la accion
+keypress: Cada que se escribe una tecla, no importa si es down o up
+focus: Cuando entras al input como activo
+blur: Una vez que das click fuera del input se ejecuta la accion
+cut: Cada que se corta (ctrl+x)
+copy: Cada que se copia (ctrl+c)
+paste: Cada que se pega (ctrl+v)
+input: Revisa todos los eventos anteriores en un evento
+change: Esta al pendiente de los cambios por ejemplo en un selector o combo box
+
+************Event Bubbling**********
+Es cuando tienes un elemento y das click en el y otros elementos tambien son presionados
+const card=document.querySelector('.card');
+const infoCurso=document.querySelector('.info-card');
+const agregarCar=document.querySelector('.agregar-carrito');
+card.addEventListener('click',function(){
+	console.log('Click en card');
+});
+infoCurso.addEventListener('click',function(){
+	console.log('Click en info curso');
+});
+agregarCar.addEventListener('click',function(){
+	console.log('Click en agregar-carrito');
+});
+
+Si se aprieta en un elemento agregarCar, que esta dentro de infoCurso, que esta
+dentro de card, se ejecutaran los 3 eventos anteriores al mismo tiempo gracias al Event Bubbling
+Para prevenir esto:
+**
+e.stopPropagation();
+**
+Esta funcion se encarga de que no pase el Event Bubbling
+
+************Delegation******
+Una alternativa para el Event Bubbling
+document.body.addEventListener('click',eliminarElemento);
+function eliminarElemento(e){
+	e.preventDefault();
+	console.log('Click');
+	console.log(e.target.classList); //Mostrara las clases a las que pertenece el elemento seleccionado
+} //Esta funcion va a mandar click a la consola cuando des click en cualquier lado
+
+Delegation es una forma en la que puedes revisar el elemento en el que estas dando click
+y si es el que deseas realizar alguna opcion
+function eliminarElemento(e){
+	e.preventDefault();
+	if(e.target.classList.contains('borrar-curso')){ //Revisa si en las clases que contiene el elemento se encuentra borrar-curso
+		e.target.parentElement.parentElement.remove();
+	}
+}
+

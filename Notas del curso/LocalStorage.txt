@@ -1,0 +1,27 @@
+
+*************Local Storage**********
+Almacenar valores en el navegador para que un usuario pueda acceder a ellos
+la proxima vez que entre a la pagina web sin tener que almacenarlos en la base de datos
+
+//Agregar a Local Storage
+
+localStorage.setItem('nombre','Juan');
+
+De esta forma ya se tiene un elemento guardado en local Storage
+El valor se va a quedar aunque recarges el navegador
+Los valores se almacenan en la forma llave,valor
+//Session Storage
+sessionStorage.setItem('nombre','Juan');
+
+El session storage se elimina cuando cierras el navegador
+El local storage se borra cuando el usuario lo hace manualmente
+o cuando borra la cache de su computadora
+
+//Eliminar local storage
+localStorage.removeItem('nombre');
+
+//Obtener valores de local storage
+localStorage.getItem('nombre') -> 'Juan'
+
+//Eliminar todo el local storage
+localStorage.clear();

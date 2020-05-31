@@ -1,0 +1,18 @@
+***********Modulos en Javascript***********
+Un modulo en programacion nos va a permitir agrupar funcionalidad relacionada en un mismo archivo, para que sea mas facil mantener y organizar el codigo.
+Podemos utilizarlo unicamente donde sea requerido.
+Divide el codigo en pequeños archivos con funcionalidad relacionada.
+Es posible usarlo en otra aplicacion
+Dependencias
+Evita conflicto con nombres de variables
+
+-Dependencia
+Un modulo puede y debe estar conectado con otro modulo.
+Si un modulo requiere una pieza de otro se dice que depende de este
+Ej.Bootstrap depende de JQuery.
+
+-Desventajas
+Cada script es un llamado HTTP
+Detiene la ejecucion mientras se descarga
+El manejo de dependencias es manual.
+

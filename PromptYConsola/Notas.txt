@@ -1,0 +1,230 @@
+************FUNCIONES***************
+//Declaration
+function saludar(){
+	console.log('Hola Mundo');
+}
+//Invocation
+saludar();
+
+//Con Argummentos
+function saludar(nombre){
+	console.log("Hola "+nombre);
+}
+saludar('Yael');
+
+//Con retorno
+function sumar(a,b){
+	return a+b;
+}
+var a=sumar(1,2); //a=3
+
+//Cuando no se envia un argumento, el nombre se vuelve undefined
+function saludar(nombre){
+	if(typeof nombre === 'undefined'){ nombre= 'Visitante'}
+	return 'Hola '+nombre;
+}
+//Forma facil
+function saludar(nombre='Visitante'){
+	return 'Hola '+nombre;
+}
+
+//Function expresion
+const suma=function(a=3,b=4){
+	return a+b;
+}
+suma(1,2);
+//Si no se le manda argumentos sumara 3+4, si se le manda
+//solo un argumento se sumara el argumento+4.
+
+Se le pueden declarar mas argumentos aunque solo le pases uno
+Y esos argumentos se pueden llamar en el orden que quieras.
+
+// IIFE
+
+//Son funciones que se ejecutan automaticamente, por ello tienen el ()
+{function(){
+	console.log("Esto es un IIFE");
+}}();
+
+//Metodos de propiedad
+//Cuando una funcion se pone dentro de un objeto
+const musica={
+	reproducir: function(){
+		console.log('Reproduciendo');
+	}
+}
+musica.reproducir();
+//Tambien se pueden guardar metodos fuera del objeto
+musica.borar=function(id){
+	console.log('Borrando la cancion '+id);
+}
+
+**********Manejo de errores*************
+Cuando una funcion regresa un error, se detiene automaticamente la ejecucion del programa
+Para evitar esto, se utiliza try-catch
+El finally sirve para ejecutar algo aunque haya o no error.
+try{
+	noexiste();
+} catch(error){
+	console.log(error);
+} finally{
+	console.log('No le importa, se ejecuta')
+}
+
+********Estructuras de control o condicionales**********
+const edad=18;
+if(edad>18){
+	console.log('Si puedes entrar al sitio')
+}
+else{
+	console.log('No puedes entrar al sitio');
+}
+
+let hora=22;
+if(hora<12){
+	console.log('Buenos dias');
+}
+else if(hora<20){
+	console.log('Buenas tardes');
+}
+else{
+	console.log('Buenas noches');
+}
+
+//Ternario
+const logueado=true;
+logueado===true? 'Si se logueo' : 'No se logueo' ;
+
+//Switch
+const metodoPago='efectivo';
+switch(metodoPago){
+	case 'efectivo':
+		break;
+	case 'cheque':
+		break;
+	case 'tarjeta':
+		break;
+	default:
+		break;
+}
+
+*********Iteraciones***********
+{}//For loop 
+for(let i=0; i<10; i++){
+}
+
+//While y Do While
+let i=0;
+while(i<10){
+	i++;
+}
+
+do{
+	i++;
+} while(i<<10);
+
+todos soportan continue y break;
+
+const pendientes=['Tarea','Comer','Proyecto','Aprender JS'];
+//ForEach
+pendientes.forEach( function(pendiente,index){
+	console.log(index+' '+pendiente);
+});
+
+const carrito=[
+	{id: 1, producto: 'Libro'},
+	{id: 2, producto: 'Camisa'},
+	{id: 3, producto: 'Guitarra'}
+];
+
+//Map
+const nombreProducto= carrito.map(function(carrito){
+	return carrito.producto;
+});
+//Si se imprime nombreProducto se imprime un arreglo
+//con la informacion de cada producto
+
+
+const automovil={
+	modelo: 'Camaro',
+	motor: 6.1,
+	anio: 1969,
+	marcha 'Chevrolet'
+}
+
+for(let auto in automovil){
+	console.log(auto+' : 'automovil[auto]);
+}
+
+***********SET Y MAPS**************
+const ciudades=['Londres','New York', 'Madrid', 'Paris'];
+const ordenes=new Set([123,231,131,102]);
+const datos=new Map();
+datos.set('nombre','juan');
+datos.set('profesion','desarrollador web');
+
+//Entries iterator
+for(let entrada of ciudades.entries()){
+	console.log(entrada); //[0,'Londres'],[1,'New York']...
+}
+//El set no tiene llave valor, son los mismos
+for(let entradas of ordenes.entries()){
+	console.log(entradas); //[123,123],[231,231]
+}
+for(let entrada of datos.entries()){
+	console.log(entrada); //['nombre','juan'], te regresa arreglos de dos posiciones
+}
+for(let entrada of ciudades){
+	//imprimira cada ciudad
+}
+for(let entrada of ordenes.values()){
+	//Va a imprimir solo los valores 123,231...
+}
+for(let entrada of datos.values()){
+	//Solo imprime los valores, no las llaves
+}
+Para el iterador .keys() en un arreglo imprime los indices
+En un set imprime los valores
+En un map imprime las llaves
+
+Un for(let letra of mensaje) siendo mensaje una string imprimira letra por letra la cadena
+
+!!!!!! document.getElementsByTagName('a'); Regresa todos los elementos en un html con etiqueta <a><\a> !!!
+
+***************WINDOW OBJECT*****************
+Informacion de la ventana del navegador.
+//Imprime el alto y ancho de la ventana
+let altura=window.outerHeight;
+let anchura=window.outerWidth;
+console.log(altura);
+console.log(anchura);
+
+outerHeight y outerWidth medidas del navegador completo
+innerHeight e innerWidth medidas de la ventana de contenido
+
+//Regresa informacion del host, url y puerto
+let ubication=window.location;
+//Regresa lo que hay en la barra de busqueda del navegador
+window.location.search
+//Cambiar pagina donde se encuentra el navegador, redireccionar
+window.location.href='http://facebook.com'
+//Regresar a paginas anteriores en el historial, n=numero de paginas que regresara en el historial
+window.history.go(-n)
+//Navigator, regresa informacion relacionada con el navegador
+window.navigator
+//Idioma en el que el user tiene configurada su computadora
+window.navigator.language
+
+*****************SCOPE*******************
+Visibilidad que tiene un valor en JS dentro de la funcion y el programa
+Globales
+ -No estan dentro de un bloque de codigo o funcion
+ -Pueden ser usadas y vistas por todo el programa
+Funcion
+ -Solo son utilizadas dentro de una funcion
+ -No se pueden ocupar en otro momento
+Bloque
+ -Las que esten dentro de un bloque, ejemplo: un IF, FOR, etc.
+  -Solo serviran para ese bloque con excepcion de las que estan declaradas con var
+  -Seguir la definicion de var,let y const
+  

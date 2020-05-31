@@ -1,0 +1,101 @@
+//PARADIGMA ORIENTADO A OBJETOS EN JAVASCRIPT
+
+Cuando crear objetos en JS hay dos formas de hacerlo:
+1.
+const nombreObjeto={
+	atributo : valor,
+	atributo2 : valor2,
+	atributo3 : function(){
+		...
+	}
+}
+2.
+function Cliente(nombre,saldo){
+	this.nombre=nombre;
+	this.saldo=saldo;
+	this.tipoCliente=function(){
+		let tipo;
+		if(this.saldo>1000){
+			tipo='Gold';
+		} else if(this.saldo>5000){
+			tipo='Platinum';
+		} else tipo='Normal';
+	}
+}
+
+const persona=new Cliente('Pedro',2000);
+
+La palabra this es la forma en la que puedes acceder
+a los atribtos de un objeto dentro del mismo
+
+const nombre= new String('Pedro');
+const numero= new Number(20);
+const bool=new Boolean(true);
+const function1=function(a,b){
+	return a+b;
+}
+const function2=new Function('a','b','return 1+2');
+const obj=new Object({nombre: 'Juan'});
+const arreglo=new Array(1,2,3,4);
+
+Tambien podemos declarar strings como objeto.
+La diferencia es que tiene muchos metodos y atributos
+que se le pueden aplicar al objeto.
+
+**********PROTOTIPOS**********
+Un prototipo es una forma de agregar atributos y
+metodos a un objeto ya creado.
+
+function Cliente(nombre,saldo){
+	this.nombre=nombre;
+	this.saldo=saldo;
+}
+
+Cliente.prototype.tipoCliente=function(){
+		let tipo;
+		if(this.saldo>1000){
+			tipo='Gold';
+		} else if(this.saldo>5000){
+			tipo='Platinum';
+		} else tipo='Normal';
+	}
+Cliente.prototype.nombreClienteSaldo=function(){
+	return `Nombre: ${this.nombre}, tu saldo es de
+			${this.saldo}, tipo cliente: ${this.tipoCliente()}`;
+}
+Hace que una funcion nada mas este disponible para 
+el tipo Cliente.
+
+*********HEREDAR PROTOTIPOS***********
+Si quieres crear otra clase de objetos que tengan algunos
+atributos en comun, se pueden heredar prototipos del que ya 
+tienes creado.
+Si tenemos la clase cliente, que se encuentra en "PROTOTIPOS"
+Y queremos crear Empresas:
+function Empresa(nombre,saldo,telefono,tipo){
+	Cliente.call(this,nombre,saldo);
+	this.telefono=telefono;
+	this.tipo=tipo;
+}
+
+Para heredad prototipos:
+Empresa.prototype=Object.create(Cliente.prototype);
+
+const empresa=new Empresa('Udemy',200000,123123134,'Educacion');
+
+*********Object Create****************
+
+const Cliente= {
+	imprimirSaldo : function(){
+		return `Hola ${this.nombre} tu saldo es ${this.saldo}`;	
+	}
+	retirarSaldo: function(retiro){
+		return this.saldo-=retiro;
+	}
+}
+ 
+const mary=Object.create(Cliente);
+Si se imprime asi saldra que es un objeto vacio
+mary.nombre='Mary';
+mary.saldo=1000;
+Esta es una forma mas corta de crear protos

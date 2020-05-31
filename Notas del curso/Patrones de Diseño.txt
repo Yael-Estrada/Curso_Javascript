@@ -1,0 +1,18 @@
+*******************PATRONES DE DISEÑO***********
+Son soluciones de codigo reutilizables que se utilizan en problemas
+comunes en aplicaciones de software
+Se emplean para que todo el codigo siga el mismo lineamiento.
+
+*De creacion de objetos.
+Se pueden crear objetos que sigan el mismo lineamiento
+Factory,Abstract Factory,Builder,Singleton,Prototype
+*De estructura
+Definen como se componen y relacionan los objetos entre sigan
+Adapter,Bridge,Composite,Decorator,Facade,Flyweight,Proxy
+*De comportamiento
+Definen la interdependencia y comunicacion entre objetos.
+Template Method,Observer,Mediator,State
+*De arquitectura
+Definen funcionalidad especifica sobre la arquitectura de una aplicacion
+como carpetas,nombres y su relacion.
+Model View-Controller,Model View-Presenter,Model View-ViewModel

@@ -1,0 +1,29 @@
+*************Indexed DB*************
+Permite crear una base de datos en el navegador que soporta
+subir archivos, objetos, imagenes, se pueden crear objetos.
+
+Storage en el cliente.
+-Guardar datos en el navegador con JS
+-No usa cookies
+-Se recomienda almacenar pocos datos, nada importante o critico.
+Opciones:
+-Web Storage(Local Storage, SessionStorage)
+*Ambos pueden guardar strings o cadenas de 
+textos, no objetos, no arreglos,no archivos.
+-LocalStorage
+*No se recomienda guardar informacion sensible.
+*Ideal para productos temporales de un carrito.
+-SessionStorage
+*Recomendado para informacion sensible (nombre,ciudad)
+*Carrito de compras temporal
+*Informacion temporal
+
+-IndexedDB
+*Puede almacenar grandes cantidades de datos estructurados incluyendo archivos,imagenes,videos
+*Utiliza indexes para almacenar los datos
+*Es una base de datos completa
+*Datos estructurados con una llave->valor
+*Asincrono
+xNo se puede sincronizar con backend
+xNo se puede utilizar en modo privado
+xEl limite de datos lo pone el navegador

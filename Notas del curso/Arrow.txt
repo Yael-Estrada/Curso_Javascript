@@ -1,0 +1,30 @@
+**********ARROW FUNCTIONS*********
+Forma convencional:
+
+let aprendiendo=function(){
+	console.log('Aprendiendo JS');
+}
+aprendiendo();
+
+Forma Arrow:
+
+aprendiendo=()=>{
+	console.log('Aprendiendo JS');
+}
+aprendiendo();
+//Una arrow function de una linea no requiere llaves
+aprendiendo=()=> console.log('Aprendiendo JS');
+aprendiendo();
+aprendiendo=()=> 'Aprendiendo JS';
+console.log(aprendiendo());
+
+Pasando parametros:
+aprendiendo=(tecnologia)=> console.log(`Aprendiendo ${tecnologia}`);
+aprendiendo('ES7');
+
+Con un callback;
+const productos=['Disco','Camisa','Guitarra'];
+const letrasProducto=productos.map(producto=>producto.length);
+
+Con foreach:
+productos.forEach(producto=>console.log(producto));

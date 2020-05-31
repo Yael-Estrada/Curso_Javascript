@@ -1,0 +1,87 @@
+**********Programacion Asincrona JS************
+Codigo sincrono:
+Si tienes un programa de 2 lineas, la linea 2 no puede 
+empezar a ejecutarse sin terminar la linea 1.
+Se ejecutan las lineas de codigo secuencialmente
+
+Codigo asincrono:
+Puedes tener 2 lineas de código y la linea 2 ejecutarse
+y finalizar antes de que la linea 1 termine de hacerlo.
+La mayor parte de las veces que se utiliza es cuando
+se interactua con una API o REST API
+
+XMLHttpRequest y Fetch API son ejemplos de codigo
+asincrono
+Jquery tambien es asincrono
+
+Funciones para crear codigo asincrono:
+Callbacks
+Promises
+Async/Await
+
+************CALLBACKS************
+//Callback en foreach
+const ciudades=['Londres','New York','Madrid','Paris','Viena'];
+ciudades.forEach(function(ciudad){
+	console.log(ciudad); //InLine Callback
+});
+
+function callback(ciudad){
+	console.log(ciudad);
+}
+ciudades.forEach(callback); //Callback
+
+***********PROMISES*********
+El valor que estamos revisando no esta disponible en el momento
+pero la idea es que este disponible en el futuro
+const esperando=new Promise(function(resolve,reject){
+	setTimeout(function(){
+		resolve('Se ejecuto');		
+	},5000);
+});
+Resolve se va a ejecutar cuando la promesa se cumple
+Reject cuando no se cumple
+esperando.then(function(mensaje){
+	console.log(mensaje);
+});
+Cuando se ejecute resolve, se ejecutara la linea then.
+es decir mandar llamar resolve es como mandar a llamar la linea then.
+
+Ejemplo:
+const aplicarDescuento=new Promise(function(resolve,reject){
+	const descuento=false;
+	if(descuento){
+		resolve('Descuento aplicado');
+	}
+	else{
+		reject('Descuento no aplicado');
+	}
+});
+//Resolve
+aplicarDescuento.then(function(msj){
+	console.log(msj);
+}).catch(function(error){
+	console.log(error);
+});
+Cuando se le pone catch es por que ocurrio el reject.
+
+
+***************ASYNC/AWAIT**************
+Hace funciones asincronas, una funcion asincrona siempre va a requerir un promise
+
+async function obtenerClientes(){
+	cons clientes=new Promise((resolve,reject)=>{
+		setTimeout(()=>{
+			resolve('Clientes descargados...');
+		},2000);
+	});
+	const error=false;
+	if(!error){
+		cons respuesta=await clientes; //Detiene la ejecucion en esta parte hasta que el promise haya finalizado.
+		return respuesta;
+	} else{
+		await Promise.reject('Hubo un error');
+	}
+}
+obtenerClientes().then(res=>console.log(res))
+.catch(error=>console.log(error));

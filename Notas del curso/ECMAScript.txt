@@ -1,0 +1,272 @@
+************Clases con ECMAScript 6***********
+Es un lenguaje de programacion que se Estandariza 
+en Javascript, es decir los est´ndares de JS se rigen
+como ECMAScript
+
+class Cliente{
+	constructor(nombre,saldo){
+		this.nombre=nombre;
+		this.saldo=saldo;
+	}
+	imprimirSaldo(){
+		return `Hola ${this.nombre}, tu saldo
+		es de ${this.saldo}`;
+	}
+	static bienvenida(){
+		return 'Bienvenido al cajero';
+	}
+}
+
+const client=new Cliente('Maria','Kanellis',10000);
+client.imprimirSaldo();
+
+Los metodos estaticos se pueden llamar sin necesidad
+de instanciar el objeto de la clase.
+
+Cliente.bienvenida();
+
+
+***********Herencia de clases********
+Una clase puede heredar los atributos y metodos de otra
+Se pueden reescribir metodos escribiendolos igual que la
+clase padre
+
+class Empresa extends Cliente {
+	constructor(nombre,saldo,telefono,tipo){
+		super(nombre,saldo);
+		this.telefono=telefono;
+		this.tipo=tipo;
+	}
+}
+
+**********Destructuring*************
+Extraer valores de un objeto sin tener que instanciarlo
+const cliente={
+	nombre: 'Alejandra',
+	tipo: 'Premium'
+}
+
+let {nombre,tipo}=cliente;
+
+Mapea en la tupla ingresada los atributos que hay en el objeto
+que se asigna, es decir en el campo nombre se mapea el atributo nombre del cliente,
+y asi respectivamente.
+
+const cliente={
+	tipo: 'Premium',
+	nombre: 'Antonio',
+	datos: {
+		ubicacion: {
+			ciudad: 'Jalisco',
+			pais: 'Mexico'
+		},
+		cuenta: {
+			desde: '10-12-2012',
+			saldo: 4000
+		}
+	}
+}
+
+let {datos:{ubicacion}}=cliente;
+
+Para hacer distructuring a los arreglos:
+
+const ciudades=['Londres','New York','Madrid','Paris'];
+const [
+		primeraCiudad,
+		segundaCiudad
+]=ciudades;
+Se extraen conforme las posiciones del arreglo
+Si se quiere extraer una del final o de enmedio:
+const [ , , , paris]=clientes;
+
+const cliente={
+	tipo: 'Premium',
+	saldo: 20000,
+	datos: {
+		nombre:'Pedro',
+		apellido:'Perez',
+		residencia: {
+			ciudad: 'Mexico'
+		}
+	},
+	movimientos: ['12-03-2018','12-03-2018']
+}
+let {
+	tipo,
+	datos:{residencia},
+	movimientos: [uno,dos]
+}=cliente;
+
+console.log(uno);
+
+*********Destructuring a Funciones*********
+//Metodo antiguo
+function reservacion(completo,opciones){
+	opciones=opciones||{};
+	let metodo=opciones.metodoPago,
+	cantidad=opciones.cantidad,
+	dias=opciones.dias
+}
+
+reservacion(
+	true,
+	{
+		metodoPago: 'tarjeta',
+		cantidad: 2000,
+		dias: 3
+	}
+);
+//Metodo nuevo
+function reservacion(completo,opciones){
+	let (metodoPago,cantidad,dias)=opciones;
+	//Para pasar valores por defecto se deben inicializar cada uno de los campos en el campo de atributos
+	//reservacion(completo,{metodoPago='efectivo',cantidad=0,dias=0}={}){
+
+	//}
+}
+
+reservacion(
+	false,
+	{
+		metodoPago:'tarjeta',
+		cantidad:2000,
+		dias: 3
+	}	
+);
+
+**********SYMBOLS**********
+Un tipo de dato cuyos valors son unicos e inmutables
+puede ser utilizado como identificadores de las propiedades
+de los objetos
+const simbolo=new Symbol();
+
+let nombre=Symbol();
+let apellido=Symbol();
+let persona={}
+persona.nombre='Juan'
+//Para agregar un symbol como propiedad:
+persona[nombre]='Juan';
+persona[apellido]='De la Torre';
+
+//igual para imprimir:
+console.log(persona[nombre]);
+
+***********SET**************+
+/*
+Tipo de dato Conjunto, es una coleccion de valores
+que no admite valores repetidos.
+*/
+let carrito=new Set();
+let numeros=new Set([1,2,3,4,5,1,2]);
+//Tamaño del set
+carrito.size //0
+numeros.size //5
+//Agregar elemento
+carrito.add('Camisa');
+//Comprueba que un elemento existe en el set
+carrito.has('Camisa'); //true
+//Eliminar del set
+carrito.delete('Camisa');
+//Vaciar el set
+carrito.clear();
+//Iterar 
+carrito.forEach(objeto=>{});
+carrito.forEach((producto,index)=>{});
+//Convertir un set a arreglo
+const arreglo=[...carrito];
+
+*************MAP****************
+/*
+	Tipo de dato (Llave,Valor), puede ser cualquier tipo de dato
+	Es parecido al set.
+*/
+
+let cliente=new Map();
+let paciente=new Map(
+		[['nombre','paciente'],
+		['cuarto','no asignado']]
+	);
+//Agregar valor
+cliente.set(llave,valor);
+//Acceder a los valores
+cliente.get(llave);
+//Tamaño
+cliente.size
+//Comprobar si existe valor
+cliente.has(llave);
+//Borrar
+cliente.delete(llave);
+cliente.clear(); 
+
+cliente.forEach((datos,index)=>{
+	index es la llave
+	datos los valores
+});
+
+**************Iteradores**************
+Son variables que nos permiten desplazarnos en una coleccion de valores
+
+function crearIterador(carrito){
+	let i=0;
+	return{
+		siguiente: ()=>{
+			let fin=(i==carrito.length);
+			let valor=!fin?carrito[i++]:undefined;
+			return{
+				fin: fin,
+				valor: valor
+			}
+		}
+	}
+}
+const carrito=['Producto 1','Producto 2','Producto 3'];
+const recorrerCarrito=crearIterador(carrito);
+console.log(recorrerCarrito.siguiente());
+//Cada que llames a la funcion siguiente(), te regresara el siguiente elemento en la coleccion
+
+****************Generadores***********
+Es una funcion que va a retornar un Iterador
+
+function *crearGenerador(){
+	yield 1;
+	yield 'Nombre';
+	yield true;
+
+}
+
+const iterador=crearGenerador();
+console.log(iterador.next().value); //Regresa 1
+
+function *nuevoGenerador(carrito){
+	for(let i=0;i<carrito.length;i++){
+		yield carrito[i];
+	}
+}
+const carrito=['Producto 1','Producto 2','Producto 3'];
+let iterador=nuevoGenerador(carrito);
+console.log(iterador.next()); //Regresa un objeto con dos campos: value y done
+//done es para saber el ultimo elemento del iterador y el value para el valor en esa posicion
+
+
+*************REGEX***************++
+//Te ayuda a buscar patrones 
+const exp=new RegExp('/abc/');
+const exp2=/abc/;
+
+let valor,expReg;
+expReg=/[0123456789]/ //== expReg=/[0-9]/
+valor=1992;
+console.log(expReg.test(valor)); //true
+valor='HOLA';
+console.log(expReg.test(valor)); //false
+exppReg=/\d\d-\d\d-\d\d\d\d/
+valor='20-10-2020';
+expReg=/\d\d:\d\d \D\D/
+valor='10:30 AM';
+/\d*/ = Uno o mas numeros;
+/^[0-9]/ = Cualquier caracter que no sea numeros;
+/\d{1,2}-\d{1,2}-\d{4}/ = Checa en una fecha que el dia sean 1 o 2 digitos, el mes 1 o 2 y el año 4;
+/\w+/= Una o mas letras:
+/([0-9])\w+/= Numeros y una o mas letras;4
+

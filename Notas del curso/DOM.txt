@@ -1,0 +1,190 @@
+***************DOM************
+Document Object Model
+Esta conformado por nodos, que son las etiquetas anidadas del documento HTML
+Document -> 
+	Es el padre de todo el documento html, contiene todas las etiquetas html
+Root(html) ->
+	Es el html del archivo, es decir la etiqueta html
+Elemento: 
+	Head->
+		Tiene todo lo que tenga que ver con el encabezado de la pagina web
+		Title->
+			Texto: 'Mi pagina web'
+	Body->
+		Tiene todo el contenido de la pagina web
+		nav->
+			a->
+			Texto:'Nosotros'
+			Atributo: 'class'
+		h1->
+			Texto:'Bienvenido'
+			atributo: 'id'
+			atributo: 'class'
+
+La parte mas grande o mas general es el document
+//Regresa un arreglo tipo HTMLAllCollection con todos los elementos del documento
+document.all;
+//Regresa el elemento 10 de la HTMLAllCollection
+document.all(10); 
+//Regresa el head del documento
+document.head;
+//Regresa el body del documento
+document.body;
+//Regresa la url en la que estamos
+document.domain;
+//Regresa la url, protocolo y puerto en el que estamos
+document.url
+//Regresa el charset
+document.characterSet;
+//Regresa los formularios
+document.forms;
+//Regresa el primer formulario
+document.forms[0];
+//Puedes acceder a los campos del formulario:
+document.forms[0].id;
+document.forms[0].className;
+document.forms[0].classList;
+//Regresa las imagenes que hay en el documento como HTMLAllCollection
+document.images;
+document.images[2];
+document.images[2].src;
+//Regresa la url unicamente sin puerto, protocolo,etc.
+document.getAttribute('src');
+//Regresa los scripts
+document.scripts;
+//Cambia de HTMLAllCollection a un arreglo convencional
+let imagenes=document.images;
+let imagenesArr=Array.from(imagenes);
+//Itera una por una en las imagenes.
+imagenesArr.forEach(function(imagen){
+	console.log(imagen);
+});
+
+******Elementos y propiedades***********
+Cuando quieres trabajar con elementos especificos y no todo el documento
+let elemento;
+//Encontrar un elemento por su id
+elemento=document.getElementById('hero');
+//Cuando ya tienes el elemento en la variable, puedes acceder a sus campos con el operador .
+elemento.id 
+elemento.className;
+//Obtiene el texto dentro de la etiqueta obtenida
+elemento.textContent||elemento.innerText; 
+
+//Permite cambiar el diseño (CSS) de cualquier elemento
+elemento.style.background='#333'; //Cambiar el color de fondo
+elemento.style.color='#fff'; //Cambia el color de fuente
+elemento.style.padding='20px'; //Agrega padding
+//Cambiar el texto contenido en la etiqueta
+elemento.textContent='Curso online'||elemento.innerText='Curso Online';
+
+*******Query Selector*********
+La unica diferencia es que debes usar la sintaxis de CSS, en este caso para id='encabezado' se le agrega un '#'
+Para class se agrega un '.'
+const encabezado=document.querySelector('#encabezado');
+//Aplicar CSS igual que getElementById
+encabezado.style.background='#333';
+encabezado.style.color='#fff';
+encabezado.style.padding='20px';
+
+IMPORTANTE: querySelector() solo regresa el primer elemento que se encuentre dentro de la clase o id ingresada
+Si se quiere regresar todos los elementos que pertenecen a esa clase se utiliza:
+querySelectorAll('#encabezado');
+
+//Tambien puedes seleccionar por etiqueta
+encabezado=document.querySelector('h1');
+
+//Para seleccionar un elemento con multiples propiedades
+encabezado=document.querySelector('.card img'); //Regresa el elemento que pertenece a la clase card y es una etiqueta img
+
+//Si hay un elemento que tiene varios elementos de la misma clase, puedes usar selectores CSS3
+enlace=document.querySelector('#principal a:first-child'); //Primer elemento 'a'
+enlace=document.querySelector('#principal a:last-child'); //Ultimo elemento 'a'
+enlace=document.querySelector('#principal a:nth-child(3)'); //3er elemento 'a'
+
+
+******Seleccionar multiples elementos**********
+//Regresa todos los elementos que pertenezcan a la clase 'clase' en forma HTMLCollection
+let enlaces=document.getElementsByClassName('clase');
+enlaces[3] //Regresa el 4o enlace que tenga la clase 'clase'
+
+//Regresa todos los elementos del documento con la etiqueta <a></a>
+const links=document.getElementsByTagName('a'); -> HTMLCollection
+Array.from(links); -> Array
+
+const enlaces=document.querySelectorAll('#principal .enlace');
+enlaces[1] //Segundo enlace de la coleccion
+
+//Regresa los enlaces con indices impares
+document.querySelectorAll('#principal a:nth-child(odd)');
+
+**********Traversing************
+Recorrer en todo el documento ir del padre al hijo, volver, etc.
+
+const navegacion=document.querySelector('#principal');
+//Regresa todos los nodos hijos del elemento con la id navegacion, puede llamarse las veces que se necesite
+navegacion.children
+//!!!!!Importante regresa un elemento y un 'text' que son los espacios que hay entre dos elementos
+//Regresa el tipo o nombre del elemento
+navegacion.children[0].nodeName
+
+//Regresa tipo del elemento, pero regresa el tipo en numero
+//1=Elementos, 2=Atributos, 3=Text Node, 8= Comentarios, 9=docuentos 10=doctype
+navegacion.children[0].nodeType
+//Ultimo nodo hijo
+navegacion.lastElementChild 
+//Primer nodo hijo
+navegacion.firstElementChilde
+//Numero de hijos
+navegacion.childElementCount
+
+//Regresa el nodo padre de este elemento
+navegacion.parentNode
+navegacion.parentElement
+
+//Regresa el elemento anterior al que te encuentras en la misma jerarquia
+navegacion.previousElementSibling
+previousSibling regresa el espacio o salto de linea previo
+
+**************Elementos html**********
+//Crear un elemento html con JS <a class='enlace' id='nuevo-id' href='#'>Nuevo enlace</a>
+const enlace=document.createElement('a');
+enlace.className='enlace';
+enlace.id='nuevo-id';
+enlace.setAttribute('href','#');
+enlace.textContent='Nuevo enlace';
+enlace.appendChild(document.createTextNode('Nuevo Enlace'));
+document.querySelector('#secundaria').appendChild(enlace);
+
+//Reemplazar elementos 
+const nuevoHeader=document.createElement('h2');
+nuevoHeader.id='encabezado';
+nuevoHeader.appendChild(document.createTextNode('Los mejores cursos'));
+
+const anterior=Nodo que se va a Reemplazar
+const padre=Padre del nodo que se va a Reemplazar
+
+padre.replaceChild(nuevoHeader,anterior);
+
+//Borrar un elemento
+elemento.remove();
+
+//Borrar elemento desde el padre
+padre.removeChild(elemento);
+
+//Añadir una nueva clase
+elemento=elemento.classList.add('nueva-clase');
+
+//Eliminar una clase
+elemento=elemento.classList.remove('nueva-clase');;
+
+//Leer atributos
+elemento=elemento.geAttribute('href');
+elemento.setAttribute('href','nuevo');
+//HTML5 puede crear sus propios atributos
+elemento.setAttribute('data-id',20);
+
+//Comprueba si el elemento tiene el atributo ingresado
+elemento.hasAttribute('data-id');
+//Remover atributos.
+elemento.removeAttribute('data-id');
