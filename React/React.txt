@@ -1,0 +1,10 @@
+/*****************ReactJS**************/
+Es una libreria de JS para crear interfaces de usuario para aplicaciones web
+-Desarrollada por Facebook
+-Corre en el cliente(no necesita respuesta de servidor)
+-Permite ordenar proyecto por componentes
+-Existe una gran cantidad de herramientas y librerias como soporte.
+
+
+
+
